@@ -1,0 +1,23 @@
+{
+  "name": "timely",
+  "version": "1.0.0",
+  "description": "Timely todo App",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClaudeFarmer93/Timely.git"
+  },
+  "author": "Hasan Almohamad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClaudeFarmer93/Timely/issues"
+  },
+  "homepage": "https://github.com/ClaudeFarmer93/Timely#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "nodemon": "^2.0.16"
+  }
+}
