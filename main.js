@@ -3,11 +3,15 @@ const port = 3000,
   app = express();
 
 const routers = require("./router.js");
+const errorCtrl = require("./controllers/errorController");
 
 // router
 app.use(routers);
 //view
 app.set("view engine", "ejs");
+//error controller
+app.use(errorCtrl.respondNoResourceFound);
+app.use(errorCtrl.respondInternalError);
 
 app
   .get("/", (req, res) => {
