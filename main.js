@@ -9,9 +9,6 @@ const errorCtrl = require("./controllers/errorController");
 app.use(routers);
 //view
 app.set("view engine", "ejs");
-//error controller
-app.use(errorCtrl.respondNoResourceFound);
-app.use(errorCtrl.respondInternalError);
 
 app
   .get("/", (req, res) => {
@@ -22,3 +19,7 @@ app
     console.log(`The Express.js server has started and is listening
 ➥ on port number: ${port}`);
   });
+  
+//error controller
+app.use(errorCtrl.respondNoResourceFound);
+app.use(errorCtrl.respondInternalError);
