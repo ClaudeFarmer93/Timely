@@ -1,4 +1,5 @@
 exports.sendReqParam = (req, res) => {
   let todos = req.params.alltodos;
-  res.send(`This is the page for ${todos}`);
+  //res.send(`This is the page for ${todos}`);
+  res.render('index', {todos})
 };
