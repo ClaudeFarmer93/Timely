@@ -1,0 +1,16 @@
+<% let name = "Jon"; %>
+<h1>Hello, <%= name %> </h1>
+<h2>Your list of things to do</h2>
+<ul>
+    <% todos.forEach(details => { %>
+    <li>
+    <div><%= details.content %></div>
+    <input type="button" onclick="location.href='/updatePage/<%= details._id %>'" value="Edit"></input>
+    <input tpye="button" onclick="location.href='/deleteTodo/<%= details._id %>'" value="Delete"></inpt>
+    </li>
+    <% }) %>
+    </ul>
+<form action="/addTodo" method="post">
+    <input type="text" name="content" placeholder="Task">
+   <input type="submit" name="submit">
+   </form>

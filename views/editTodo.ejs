@@ -1,0 +1,22 @@
+<% let name="Jon" ; %>
+    <h1>Hello, <%= name %>
+    </h1>
+    <h2>Your list of things to do</h2>
+    <ul>
+        <% todos.forEach(details=> { %>
+            <% if (details._id==taskId) {%>
+                <li>
+                    <form action="/updateTodo/<%= details.id %>" method="post">
+                        <input type="text" name="content" placeholder="<%= details.content %>">
+                        <input type="submit" onclick="location.href='/todos/:alltodos'" name="ok">
+                        <input type="button" onclick="location.href='/todos/:alltodos'" value="Cancel">
+                    </form>
+                </li>
+                <% } else { %>
+
+                    <li>
+                        <div><%= details.content %></div>
+                    </li>
+                    <% } %>
+                    <% }) %>
+    </ul>
