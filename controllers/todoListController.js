@@ -5,13 +5,20 @@ class TodoListController {
         TodoList.find({})
             .exec()
             .then((todos) => {
-                console.log(todos)
-                res.render("todo", {
-                    todos: todos
-                });
+              //  console.log(todos)
+                res.render("todo", { todos: todos });
             })
-        //res.send(`This is the page for ${todos}`);
+            .catch(error => console.log(error));
 
+    };
+    static getTodo = (req, res) => {
+        const todoId = req.params.id;
+        TodoList.find({})
+            .exec()
+            .then((todo) => {
+                res.render("editTodo", { todos: todo, taskId: todoId })
+            })
+            .catch(error => console.log(error));
     };
     static createTodo = (req, res) => {
         const todoTask = new TodoList({
@@ -20,31 +27,22 @@ class TodoListController {
         todoTask.save()
             .then(result => console.log(result))
             .catch(error => console.log(error));
-        res.redirect("/todos/:alltodos");
-    };
-
-    static updatePage = (req, res) => {
-        const todoId = req.params.id;
-        TodoList.find({}, (error, todo) =>{
-            if(error) return res.send(500, error);
-            res.render("editTodo", {todos:todo, taskId:todoId});
-        });
+        res.redirect("/todos/");
     };
 
     static updateTodo = (req, res) => {
         const todoId = req.params.id;
 
-        TodoList.findByIdAndUpdate(todoId, {content: req.body.content}, error =>{
-            if (error) return res.send(500, error);
-            res.redirect("/todos/:alltodos");
-        });
+        TodoList.findByIdAndUpdate(todoId, { content: req.body.content })
+            .then(res.redirect("/todos/"))
+            .catch(error => console.log(error));
     };
 
-    static deleteTodo = (req, res) =>{
+    static deleteTodo = (req, res) => {
         const todoId = req.params.id;
-        TodoList.findByIdAndRemove(todoId, error =>{
-            res.redirect("/todos/:alltodos")
-        })
+        TodoList.findByIdAndRemove(todoId)
+            .then(res.redirect("/todos/"))
+            .catch(error => console.log(error))
     }
 };
 module.exports = TodoListController;
