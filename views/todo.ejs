@@ -5,8 +5,8 @@
     <% todos.forEach(details => { %>
     <li>
     <div><%= details.content %></div>
-    <input type="button" onclick="location.href='/updatePage/<%= details._id %>'" value="Edit"></input>
-    <input tpye="button" onclick="location.href='/deleteTodo/<%= details._id %>'" value="Delete"></inpt>
+    <input type="button" onclick="location.href='/getTodo/<%= details._id %>'" value="Edit"></input>
+    <input type="button" onclick="location.href='/deleteTodo/<%= details._id %>'" value="Delete"></input>
     </li>
     <% }) %>
     </ul>

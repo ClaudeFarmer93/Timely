@@ -2,7 +2,6 @@ require("./config/mongoose");
 
 const routers = require("./router.js");
 const bp = require("body-parser");
-const errorCtrl = require("./controllers/errorController");
 
 const port = 3000,
   express = require("express"),
@@ -18,11 +17,8 @@ app.set("view engine", "ejs");
 
 app.listen(port, () => {
   console.log(`The Express.js server has started and is listening
-➥ on port number: ${port}`);
+on port number: ${port}`);
 });
 //Public folder
 app.use(express.static("public"));
 
-//error controller
-app.use(errorCtrl.respondNoResourceFound);
-app.use(errorCtrl.respondInternalError);

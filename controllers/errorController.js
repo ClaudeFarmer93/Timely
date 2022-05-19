@@ -9,5 +9,5 @@ exports.respondInternalError = (error, req, res, next) => {
  console.log(`ERROR occurred: ${error.stack}`)
  res.status(errorCode);
  res.send(`${errorCode} | Sorry, our application is
-➥experiencing a problem!`);
+experiencing a problem!`);
 };

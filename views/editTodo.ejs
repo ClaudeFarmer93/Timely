@@ -8,8 +8,8 @@
                 <li>
                     <form action="/updateTodo/<%= details.id %>" method="post">
                         <input type="text" name="content" placeholder="<%= details.content %>">
-                        <input type="submit" onclick="location.href='/todos/:alltodos'" name="ok">
-                        <input type="button" onclick="location.href='/todos/:alltodos'" value="Cancel">
+                        <input type="submit" onclick="location.href='/todos/'" name="ok">
+                        <input type="button" onclick="location.href='/todos/'" value="Cancel">
                     </form>
                 </li>
                 <% } else { %>
