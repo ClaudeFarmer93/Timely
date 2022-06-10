@@ -5,7 +5,7 @@ class TodoListController {
         TodoList.find({})
             .exec()
             .then((todos) => {
-              //  console.log(todos)
+                //  console.log(todos)
                 res.render("todo", { todos: todos });
             })
             .catch(error => console.log(error));
