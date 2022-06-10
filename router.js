@@ -3,6 +3,7 @@ const router = require("express").Router();
 const homeController = require("./controllers/homeController");
 const TodoController = require("./controllers/TodoListController");
 const errorCtrl = require("./controllers/errorController");
+const UserController = require("./controllers/userController");
 
 //middleware print req Url
 router.use((req, res, next) => {
@@ -17,6 +18,8 @@ router.get("/getTodo/:id", TodoController.getTodo);
 router.post("/addTodo", TodoController.createTodo);
 router.post("/updateTodo/:id", TodoController.updateTodo);
 router.get("/deleteTodo/:id", TodoController.deleteTodo);
+router.get("/userRegister", UserController.loadRegisterPage);
+router.post("/users/create", UserController.register);
 
 
 //error controller
