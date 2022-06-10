@@ -5,10 +5,17 @@ const todoListSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date:{
+    date: {
         type: Date,
         default: Date.now
-    }
+    },
+    updated_at: {
+        type: Date,
+    },
+    created_at: {
+        type: Date,
+    },
+    users: [{ type: Schema.Types.ObjectId, ref: "userSchema" }]
 });
 
-module.exports=mongoose.model("TodoList", todoListSchema);
+module.exports = mongoose.model("TodoList", todoListSchema);
