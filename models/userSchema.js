@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
 const userSchema = mongoose.Schema({
     fullname: {
@@ -13,14 +12,13 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password is required"],
-        minglength: [5, "Your passowrd length should be greater than 5"]
+        minlength: [5, "Your password length should be greater than 5"]
     },
     updated_at: {
         type: Date,
     },
     created_at: {
         type: Date,
-    },
-    todoLists: [{ type: Schema.Types.ObjectId, ref: "todoListSchema" }]
+    }
 });
 module.exports = mongoose.model("User", userSchema);
