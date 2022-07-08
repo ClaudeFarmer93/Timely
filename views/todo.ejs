@@ -8,6 +8,7 @@
     <input type="button" onclick="location.href='/getTodo/<%= details._id %>'" value="Edit"></input>
     <input type="button" onclick="location.href='/deleteTodo/<%= details._id %>'" value="Delete"></input>
     </li>
+    <li><% include views/todoModal %></li>
     <% }) %>
     </ul>
 <form action="/addTodo" method="post">
@@ -15,3 +16,6 @@
     <input type="text" name="owner" placeholder="Owner">
    <input type="submit" name="submit">
    </form>
+
+   <script type="text/javascript" src="/js/jquery.min.js"></script>
+   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
