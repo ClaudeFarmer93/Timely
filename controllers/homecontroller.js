@@ -1,3 +1,3 @@
 exports.sendReqParam = (req, res) => {
-  res.send("Welcome to Timely");
+  res.render("Welcome to Timely");
 };

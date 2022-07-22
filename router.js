@@ -5,41 +5,36 @@ const TodoController = require("./controllers/TodoListController");
 const errorCtrl = require("./controllers/errorController");
 const UserController = require("./controllers/userController");
 const expressSession = require("express-session"),
- cookieParser = require("cookie-parser"),
- connectFlash = require("connect-flash");
-/* const passport = require("passport");
+  cookieParser = require("cookie-parser"),
+  connectFlash = require("connect-flash");
 
-router.use(passport.initialize());
-router.use(passport.session());
-const User = require("./models/userSchema");
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser()); */
 
- //flash-messages modules
+
+//flash-messages modules
 router.use(cookieParser("secret_passcode"));
 router.use(expressSession({
- secret: "secret_passcode",
- cookie: {
- maxAge: 4000000
- },
- resave: false,
- saveUninitialized: false
+  secret: "secret_passcode",
+  cookie: {
+    maxAge: 4000000
+  },
+  resave: false,
+  saveUninitialized: false
 }));
+
 router.use(connectFlash());
 router.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
   next();
- });
+});
 
 //middleware print req Url
 router.use((req, res, next) => {
-    console.log(`request made to: ${req.url}`);
-    next();
-  });
-router.use(UserController.verifyToken);
+  console.log(`request made to: ${req.url}`);
+  next();
+});
+//router.use(UserController.verifyToken);
 router.get("/", homeController.sendReqParam);
-router.get("/todos/", TodoController.getAllTodo, TodoController.respondJSON);
+router.get("/todos", TodoController.getAllTodo, TodoController.respondJSON);
 router.use(TodoController.errorJSON);
 router.get("/getTodo/:id", TodoController.getTodo);
 router.post("/addTodo", TodoController.createTodo);
@@ -48,9 +43,9 @@ router.get("/deleteTodo/:id", TodoController.deleteTodo);
 router.get("/userRegister", UserController.loadRegisterPage);
 router.post("/users/create", UserController.register);
 //router.get("/users", UserController.loadUserPage);
-router.get("/users/:id", UserController.loadUserPage);
 router.get("/login", UserController.userLogin);
-router.post("/users/login", UserController.authenticate, UserController.redirectView);
+router.get("/users/:id", UserController.loadUserPage);
+router.post("/users/login", UserController.authenticate);
 
 
 //error controller
