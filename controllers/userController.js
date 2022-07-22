@@ -1,5 +1,7 @@
 const User = require("../models/userSchema");
+
 const token = process.env.TOKEN || "todoT0k3n";
+const passport = require("passport");
 class UserController {
 
     static verifyToken = (req, res, next) => {
@@ -17,15 +19,22 @@ class UserController {
             next(new Error("Invalid API token."));
         }
     }
+    /*     static authenticate = passport.authenticate("local", {
+            failureRedirect: "/login",
+            failureFlash: "Failed to login.",
+            successRedirect: "/",
+            successFlash: "Logged in!"
+        }) */
     static loadRegisterPage(req, res, next) {
         res.render("userRegisteration");
     }
     static loadUserPage(req, res) {
-        const userId = req.params.id
-        User.findOne({ userId })
+        const userId = req.params.id;
+        console.log("#####here#### " + req.params.id);
+        User.findOne({ _id: userId })
             .exec()
             .then((user) => {
-                console.log("###### User by Id: " + typeof (user));
+                console.log("###### User by Id: " + user);
                 console.log(user.fullname);
                 res.render("userPage", { userId: user });
             })
@@ -35,29 +44,33 @@ class UserController {
         res.render("login");
     }
     static authenticate(req, res, next) {
-        console.log("##### LOGIN ATTEMP ####");
+        console.log("##### LOGIN ATTEMPT ####");
         User.findOne({ email: req.body.email })
             .then(user => {
                 if (user) {
                     user.passwordComparison(req.body.password)
                         .then(passwordsMatch => {
+
+                            console.log(passwordsMatch)
                             if (passwordsMatch) {
-                                console.log(user);
-                                res.redirect = `/users/${user._id}`;
+                                console.log(user._id.toString());
+                                let temp = user._id.toString();
+                                res.redirect(`/users/${temp}`);
                                 //req.flash("success", `${user.fullName}'s logged in successfully!`);
-                                console.log("success", `${user.fullName}'s logged in successfully!`);
-                                res.user = user;
+                                console.log("success", `${user.fullname}'s logged in successfully!`);
+                                //res.user = user;
+                                console.log("############### ", res.locals);
                             } else {
                                 //req.flash("error", "Failed to log in user account: Incorrect Password.");
                                 console.log("error", "Failed to log in user account: Incorrect Password.");
-                                res.redirect = "/users/login";
+                                res.redirect("/users/login");
                             }
                             next();
                         });
                 } else {
                     //req.flash("error", "Failed to log in user account: User account not found.");
                     console.log("error", "Failed to log in user account: User account not found.");
-                    res.redirect = "/users/login";
+                    res.redirect("/");
                     next();
                 }
             })
@@ -71,7 +84,6 @@ class UserController {
     }
     static register(req, res, next) {
 
-        console.log("############ CALLED ########");
         const payload = {
             fullname: req.body.fullname,
             email: req.body.email,
@@ -84,7 +96,7 @@ class UserController {
         User.create(payload)
             .then(user => {
                 //req.flash("success", `${user.fullname}'s account created successfully!`);
-                res.redirect("/users");
+                res.redirect("/login");
                 console.log("suscess create an user", res.locals);
                 //res.locals.user = user;
                 next();
